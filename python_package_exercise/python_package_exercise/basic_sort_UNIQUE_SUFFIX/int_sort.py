@@ -25,18 +25,55 @@ def bubble(int_list):
     """
     bubble docstring
     """
-    print("bubble sort")
+    arr = int_list.copy()
+    n = len(arr)
+
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        if not swapped:
+            break
+
+    return arr
 
 
 def quick(int_list):
     """
     qsort docstring
     """
-    print("quick sort")
+    arr = int_list.copy()
+
+    def _quick(a):
+        if len(a) <= 1:
+            return a
+
+        pivot = a[len(a) // 2]
+        left = [x for x in a if x < pivot]
+        mid = [x for x in a if x == pivot]
+        right = [x for x in a if x > pivot]
+
+        return _quick(left) + mid + _quick(right)
+
+    return _quick(arr)
 
 
 def insertion(int_list):
     """
     insertion docstring
     """
-    print("insertion sort")
+    arr = int_list.copy()
+
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+
+        arr[j + 1] = key
+
+    return arr
